@@ -17,11 +17,13 @@
             background-size: cover; 
             /* background-repeat: no-repeat; 
             background-position: center;      */
+            
             text-align: center;
         }
 
         div{
             margin:50px;
+            display: inline-block;
         }
 
         h1{
@@ -29,15 +31,34 @@
             font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
         }
 
+        button{
+            height: 30px;
+
+            width: 55px;
+        }
+
+        button:hover{
+           background-color:burlywood;
+        }
+
         input{
-            width:200px
+            width:200px;
+            height: 20px;
             padding:10px;
             margin: 15px;
         }
 
+        input:hover{
+           background-color:burlywood;
+        }
+
         p{
+            
          padding:10px;
-         color:dimgray   
+         color:white;
+         font-size: 20px;
+         
+        
         }
 
 
@@ -55,6 +76,10 @@
 
     <p id="soln">youre right/Wrong</p>
 
+    <p id="scr">Schore: 10</p>
+
+
+
     </div>
 
 
@@ -63,9 +88,10 @@
     var uservalue = document.getElementById("humanvalue")
     var machinevalue = document.getElementById("compvalue")
     var result = document.getElementById("soln")
+    var scr = document.getElementById("scr")
    
 
-    var totalschore = 10
+    var schore = 10
 
     function check(){
  
@@ -77,10 +103,27 @@
         machinevalue.textContent ="The computer result is : "+finalAnswer
 
         if(giv == finalAnswer){
-            result.textContent ="you are win"
+            result.textContent ="you are win 🏆"
+            result.style.backgroundColor ="green"
+            result.style.color ="white"
             alert("You Won...")
-        } else{
-            result.textContent ="you are Lose"
+        }
+        
+        else if(giv > 10){
+            result.textContent ="Try again 🙅🏻"
+            result.style.backgroundColor ="yellow"
+            result.style.color ="black"
+            alert("input mismatch: Enter the value lessthen 10 ")
+
+        }
+        else{
+            schore = schore-1
+            result.textContent ="you are Lose 😔"
+            result.style.backgroundColor ="red"
+            scr.textContent="Your Schore : "+schore
+
+
+
             
         }
 
