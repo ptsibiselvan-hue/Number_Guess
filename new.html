@@ -1,0 +1,684 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Game</title>
+
+    <style>
+
+        *{
+            margin:0px;
+            padding:0px;
+        }
+
+        body{
+            background-image: url(https://th.bing.com/th/id/OIP.vM9hkqqFxv4HjhMkqluoowHaE7?w=278&h=181&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3) ;
+            background-size: cover; 
+            /* background-repeat: no-repeat; 
+            background-position: center;      */
+            
+            text-align: center;
+        }
+
+        div{
+            margin:50px;
+            display: inline-block;
+        }
+
+        h1{
+            color:bisque;
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+        }
+
+        button{
+            height: 30px;
+
+            width: 55px;
+        }
+
+        button:hover{
+           background-color:burlywood;
+        }
+
+        input{
+            width:200px;
+            height: 20px;
+            padding:10px;
+            margin: 15px;
+        }
+
+        input:hover{
+           background-color:burlywood;
+        }
+
+        p{
+            
+         padding:10px;
+         color:white;
+         font-size: 20px;
+         
+        
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div>
+        
+    <h1>Guess the Number From 1 to 10</h1>
+
+    <input id="humanvalue" placeholder="Enter a number from 1 to 10" required>
+    <button  onclick="check()">check</button>
+    <p id="compvalue"><b>The computer result is : </b></p>
+
+    <p id="soln">youre right/Wrong</p>
+
+    <p id="scr">Schore: 10</p>
+
+
+
+    </div>
+
+
+<script>
+    
+    var uservalue = document.getElementById("humanvalue")
+    var machinevalue = document.getElementById("compvalue")
+    var result = document.getElementById("soln")
+    var scr = document.getElementById("scr")
+   
+
+    var schore = 10
+
+    function check(){
+ 
+        var giv = Number(humanvalue.value)
+
+        var rand = Math.random();
+
+        var finalAnswer = (Math.floor(rand*10)+1)
+        machinevalue.textContent ="The computer result is : "+finalAnswer
+
+        if(giv == finalAnswer){
+            result.textContent ="you are win 🏆"
+            result.style.backgroundColor ="green"
+            result.style.color ="white"
+            alert("You Won...")
+        }
+        
+        else if(giv > 10){
+            result.textContent ="Try again 🙅🏻"
+            result.style.backgroundColor ="yellow"
+            result.style.color ="black"
+            alert("input mismatch: Enter the value lessthen 10 ")
+
+        }
+        else{
+            schore = schore-1
+            result.textContent ="you are Lose 😔 Try Again"
+            result.style.backgroundColor ="red"
+            scr.textContent="Your Schore : "+schore
+
+
+
+            
+        }
+
+    }
+
+
+
+    
+</script>
+
+    
+</body>
+</html> -->
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guess Game</title>
+
+<style>
+/* ================= ROOT COLORS ================= */
+:root{
+    --bg1:#0f2027;
+    --bg2:#203a43;
+    --bg3:#2c5364;
+
+    --primary:#00f2fe;
+    --secondary:#4facfe;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --warning:#facc15;
+
+    --glass: rgba(255,255,255,0.15);
+}
+
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", system-ui, sans-serif;
+}
+
+/* ================= BODY ================= */
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
+    overflow:hidden;
+}
+
+/* ================= BACKGROUND LIGHTS ================= */
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    border-radius:50%;
+    filter: blur(120px);
+    opacity:0.6;
+    z-index:0;
+}
+
+body::before{
+    background:#00f2fe;
+    top:-120px;
+    left:-120px;
+}
+
+body::after{
+    background:#ff4ecd;
+    bottom:-120px;
+    right:-120px;
+}
+
+/* ================= CARD ================= */
+.game-card{
+    position:relative;
+    z-index:1;
+    width:380px;
+    padding:35px;
+    border-radius:22px;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.05)
+    );
+    backdrop-filter: blur(18px);
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.4);
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+/* ================= FLOAT ANIMATION ================= */
+@keyframes cardFloat{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-10px); }
+    100%{ transform:translateY(0); }
+}
+
+/* ================= TITLE ================= */
+h1{
+    text-align:center;
+    color:white;
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#e5e7eb;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+/* ================= INPUT ================= */
+input{
+    width:100%;
+    padding:14px;
+    border-radius:14px;
+    border:none;
+    outline:none;
+    font-size:16px;
+    text-align:center;
+    background:rgba(255,255,255,0.9);
+    transition:all 0.3s ease;
+}
+
+input:focus{
+    box-shadow:0 0 0 3px rgba(79,172,254,0.6);
+    transform:scale(1.04);
+}
+
+/* ================= BUTTON ================= */
+button{
+    width:100%;
+    margin-top:18px;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    color:#0f172a;
+    cursor:pointer;
+    background: linear-gradient(90deg,var(--primary),var(--secondary));
+    transition:all 0.3s ease;
+}
+
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+}
+
+/* ================= TEXT OUTPUT ================= */
+p{
+    margin-top:14px;
+    color:white;
+    text-align:center;
+}
+
+/* ================= RESULT BOX ================= */
+#soln{
+    margin-top:18px;
+    padding:12px;
+    border-radius:12px;
+    font-weight:600;
+    transition:all 0.3s ease;
+}
+
+/* ================= SCORE ================= */
+#scr{
+    font-size:18px;
+    font-weight:700;
+    margin-top:10px;
+}
+
+/* ================= FOOTER TEXT ================= */
+.footer{
+    margin-top:20px;
+    font-size:12px;
+    text-align:center;
+    color:#d1d5db;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game-card">
+    <h1>🎯 Number Guess Game</h1>
+    <div class="subtitle">Guess a number between 1 and 10</div>
+
+    <input id="humanvalue" type="number" placeholder="Enter your guess">
+
+    <button onclick="check()">Check Guess</button>
+
+    <p id="compvalue">Computer Result: —</p>
+    <p id="soln">Waiting for your guess...</p>
+    <p id="scr">Score: 10</p>
+
+    <div class="footer">Designed with HTML • CSS • JavaScript</div>
+</div>
+
+<script>
+let score = 10;
+
+function check(){
+    const user = Number(document.getElementById("humanvalue").value);
+    const comp = Math.floor(Math.random()*10)+1;
+
+    document.getElementById("compvalue").textContent =
+        "Computer Result: " + comp;
+
+    const result = document.getElementById("soln");
+    const scoreText = document.getElementById("scr");
+
+    if(user < 1 || user > 10){
+        result.textContent = "⚠ Enter a number between 1 and 10";
+        result.style.background = "#facc15";
+        result.style.color = "#000";
+        return;
+    }
+
+    if(user === comp){
+        result.textContent = "🎉 Correct! You Win!";
+        result.style.background = "#22c55e";
+        result.style.color = "#fff";
+        alert("You Won 🏆");
+    }else{
+        score--;
+        result.textContent = "❌ Wrong Guess. Try Again!";
+        result.style.background = "#ef4444";
+        result.style.color = "#fff";
+        scoreText.textContent = "Score: " + score;
+
+        if(score === 0){
+            alert("Game Over 😢");
+            score = 10;
+            scoreText.textContent = "Score: 10";
+        }
+    }
+}
+</script>
+
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Number Guess Game</title>
+
+<style>
+:root{
+  --bg:#020617;
+  --card:rgba(255,255,255,0.15);
+  --primary:#22d3ee;
+  --secondary:#a855f7;
+  --success:#22c55e;
+  --danger:#ef4444;
+  --warning:#facc15;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',system-ui,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at top,#0f172a,#020617);
+}
+
+.card{
+  width:380px;
+  padding:32px;
+  border-radius:22px;
+  background:linear-gradient(135deg,rgba(255,255,255,.3),rgba(255,255,255,.05));
+  backdrop-filter:blur(18px);
+  box-shadow:0 30px 70px rgba(0,0,0,.6);
+  text-align:center;
+}
+
+h1{
+  color:#fff;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  color:#cbd5f5;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  outline:none;
+  font-size:16px;
+  text-align:center;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+p{
+  margin-top:12px;
+  color:white;
+}
+
+#result{
+  padding:10px;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  margin-top:18px;
+  font-size:14px;
+}
+
+.controls span{
+  cursor:pointer;
+  color:var(--primary);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🎯 Number Guess Game</h1>
+  <div class="subtitle">Guess a number between 1 and 10</div>
+
+  <input id="userInput" type="number" placeholder="Enter your guess (1–10)">
+
+  <button onclick="checkGuess()">Check Guess</button>
+
+  <p id="computer">Computer Result: —</p>
+  <p id="result">Waiting for your guess…</p>
+
+  <p id="score">Score: 10</p>
+  <p id="highScore">High Score: 0</p>
+
+  <div class="controls">
+    <span id="soundBtn" onclick="toggleSound()">🔊 Sound ON</span>
+    <span onclick="resetGame()">🔄 Reset</span>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="winSound" src= "win.mp3"></audio>
+<audio id="loseSound" src="lose.mp3"></audio>
+
+<script>
+let score = 10;
+let soundOn = true;
+
+// Load high score safely
+let highScore = Number(localStorage.getItem("highScore")) || 0;
+document.getElementById("highScore").textContent = "High Score: " + highScore;
+
+function playSound(id){
+  if(soundOn){
+    const audio = document.getElementById(id);
+    audio.currentTime = 0;
+    audio.play();
+  }
+}
+
+function toggleSound(){
+  soundOn = !soundOn;
+  document.getElementById("soundBtn").textContent =
+    soundOn ? "🔊 Sound ON" : "🔇 Sound OFF";
+}
+
+function checkGuess(){
+  const input = document.getElementById("userInput");
+  const userValue = Number(input.value);
+  const compValue = Math.floor(Math.random() * 10) + 1;
+
+  const result = document.getElementById("result");
+  const scoreText = document.getElementById("score");
+
+  if(userValue < 1 || userValue > 10){
+    result.textContent = "⚠ Please enter a number between 1 and 10";
+    result.style.background = "var(--warning)";
+    result.style.color = "#000";
+    return;
+  }
+
+  document.getElementById("computer").textContent =
+    "Computer Result: " + compValue;
+
+  if(userValue == compValue){
+    playSound("winSound");
+    result.textContent = "🎉 Correct! You Win!";
+    result.style.background = "var(--success)";
+    result.style.color = "#fff";
+
+    if(score > highScore){
+      highScore = score;
+      localStorage.setItem("highScore", highScore);
+      document.getElementById("highScore").textContent =
+        "High Score: " + highScore;
+    }
+  } else {
+    playSound("loseSound");
+    score--;
+    scoreText.textContent = "Score: " + score;
+
+    result.textContent = "❌ Wrong Guess! Try Again";
+    result.style.background = "var(--danger)";
+    result.style.color = "#fff";
+
+    if(score === 0){
+      alert("Game Over 😢 Restarting game.");
+      resetGame();
+    }
+  }
+
+  input.value = "";
+}
+
+function resetGame(){
+  score = 10;
+  document.getElementById("score").textContent = "Score: 10";
+  document.getElementById("result").textContent = "Waiting for your guess…";
+  document.getElementById("result").style.background = "transparent";
+  document.getElementById("computer").textContent = "Computer Result: —";
+  document.getElementById("userInput").value = "";
+}
+</script>
+
+
+</body>
+</html>
+
